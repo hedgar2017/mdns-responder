@@ -8,7 +8,7 @@ To use it, first add this to your `Cargo.toml`:
 
 ```toml
 [dependencies.mdns-responder]
-git = "https://github.com/fubarnetes/rust-mdns-responder"
+git = "https://github.com/hedgar2017/rust-mdns-responder"
 ```
 
 Then, add this to your crate root:
