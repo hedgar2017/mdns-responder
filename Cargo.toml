@@ -14,8 +14,8 @@ libc = "0.2.35"
 log = "0.3"
 multimap = "0.3"
 net2 = "0.2"
-nix = "0.9.0"
-rand = "0.3"
+nix = "0.12.0"
+rand = "0.6"
 tokio-core = "0.1.1"
 dns-parser = { git = "https://github.com/plietar/dns-parser" }
 
