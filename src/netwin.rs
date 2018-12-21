@@ -6,12 +6,16 @@ use std;
 use std::net::IpAddr;
 use std::io;
 use std::ffi::{CStr, CString};
-use self::winapi::{AF_UNSPEC, ERROR_SUCCESS, ERROR_BUFFER_OVERFLOW, ULONG, PVOID, DWORD, PCHAR};
+use self::winapi::shared::ws2def::{AF_UNSPEC, SOCKADDR};
+use self::winapi::shared::winerror::{ERROR_SUCCESS, ERROR_BUFFER_OVERFLOW};
+use self::winapi::um::winnt::{CHAR, INT, PVOID, PCHAR};
+use self::winapi::shared::ntdef::{ULONG};
+use self::winapi::shared::minwindef::DWORD;
 
 pub fn gethostname() -> io::Result<String> {
     const MAX_COMPUTERNAME_LENGTH: usize = 15;
 
-    let mut buf = [0 as winapi::CHAR; MAX_COMPUTERNAME_LENGTH + 1];
+    let mut buf = [0 as CHAR; MAX_COMPUTERNAME_LENGTH + 1];
     let mut len = buf.len() as u32;
 
     unsafe {
@@ -60,8 +64,8 @@ pub fn getifaddrs() -> Vec<InterfaceAddress> {
 
 #[repr(C)]
 struct SOCKET_ADDRESS {
-    lp_sockaddr: *const winapi::SOCKADDR,
-    length: winapi::c_int
+    lp_sockaddr: *const SOCKADDR,
+    length: INT,
 }
 
 #[repr(C)]
