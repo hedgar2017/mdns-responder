@@ -25,7 +25,11 @@ pub trait AddressFamily {
         let builder = Self::socket_builder()?;
         builder.reuse_address(true)?;
         #[cfg(not(windows))]
-        builder.reuse_port(true)?;
+        {
+            if let Err(e) = builder.reuse_port(true) {
+                eprintln!("Failed to reuse_port")
+            }
+        }
         let socket = builder.bind(&addr)?;
         Ok(socket)
     }
